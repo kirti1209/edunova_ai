@@ -3,6 +3,10 @@ import '../../../constants/app_colors.dart';
 import '../../../constants/app_strings.dart';
 import '../widgets/dashboard_card.dart';
 import '../widgets/app_drawer.dart';
+import '../widgets/dashboard_header.dart';
+import '../widgets/quick_stats.dart';
+import '../widgets/focus_chips.dart';
+import '../widgets/highlights_section.dart';
 import '../../login/services/auth_service.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -51,57 +55,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Welcome Section
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(24),
-                decoration: const BoxDecoration(
-                  color: AppColors.dark,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30),
-                  ),
-                ),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Welcome back!',
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    
-                  ],
-                ),
-              ),
+              DashboardHeader(userEmail: userEmail),
               const SizedBox(height: 24),
               
               // Quick Stats
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: _StatCard(
-                        title: 'Courses',
-                        value: '12',
-                        icon: Icons.book,
-                        color: AppColors.primary,
-                      ),
-                    ),
-                    SizedBox(width: 12),
-                    Expanded(
-                      child: _StatCard(
-                        title: 'Progress',
-                        value: '85%',
-                        icon: Icons.trending_up,
-                        color: Colors.green,
-                      ),
-                    ),
-                  ],
-                ),
+              QuickStats(
+                items: const [
+                  StatItem(
+                    title: 'Courses',
+                    value: '12',
+                    icon: Icons.book,
+                    color: AppColors.primary,
+                  ),
+                  StatItem(
+                    title: 'Progress',
+                    value: '85%',
+                    icon: Icons.trending_up,
+                    color: Colors.green,
+                  ),
+                ],
               ),
               const SizedBox(height: 24),
               // Today's Focus (quick micro-goals)
@@ -117,18 +89,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
               ),
               const SizedBox(height: 12),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: const [
-                    _FocusChip(label: 'Finish Flutter module'),
-                    _FocusChip(label: 'Review UI/UX notes'),
-                    _FocusChip(label: 'Attempt quiz'),
-                    _FocusChip(label: 'Watch live Q&A'),
-                  ],
-                ),
+              const FocusChips(
+                items: [
+                  'Finish Flutter module',
+                  'Review UI/UX notes',
+                  'Attempt quiz',
+                  'Watch live Q&A',
+                ],
               ),
               const SizedBox(height: 24),
               
@@ -183,32 +150,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
               ),
               const SizedBox(height: 12),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  children: const [
-                    _HighlightCard(
-                      title: 'Assignment due',
-                      subtitle: 'UI/UX Wireframes • due in 6h',
-                      icon: Icons.timer,
-                      color: Colors.orange,
-                    ),
-                    SizedBox(height: 10),
-                    _HighlightCard(
-                      title: 'Live mentor note',
-                      subtitle: 'Join the AMA at 5:30 PM',
-                      icon: Icons.chat,
-                      color: AppColors.primary,
-                    ),
-                    SizedBox(height: 10),
-                    _ProgressHighlightCard(
-                      title: 'Certificate progress',
-                      subtitle: 'Mobile Dev Track • 60% complete',
-                      icon: Icons.workspace_premium,
-                      color: Colors.green,
-                      progress: 0.6,
-                    ),
-                  ],
+              HighlightsSection(
+                highlights: const [
+                  HighlightItem(
+                    title: 'Assignment due',
+                    subtitle: 'UI/UX Wireframes • due in 6h',
+                    icon: Icons.timer,
+                    color: Colors.orange,
+                  ),
+                  HighlightItem(
+                    title: 'Live mentor note',
+                    subtitle: 'Join the AMA at 5:30 PM',
+                    icon: Icons.chat,
+                    color: AppColors.primary,
+                  ),
+                ],
+                progressHighlight: const ProgressHighlight(
+                  title: 'Certificate progress',
+                  subtitle: 'Mobile Dev Track • 60% complete',
+                  icon: Icons.workspace_premium,
+                  color: Colors.green,
+                  progress: 0.6,
                 ),
               ),
               const SizedBox(height: 24),
@@ -241,182 +203,3 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 }
-
-class _StatCard extends StatelessWidget {
-  final String title;
-  final String value;
-  final IconData icon;
-  final Color color;
-
-  const _StatCard({
-    required this.title,
-    required this.value,
-    required this.icon,
-    required this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(icon, color: color, size: 28),
-            const SizedBox(height: 12),
-            Text(
-              value,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: color,
-              ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 14,
-                color: AppColors.dark,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _FocusChip extends StatelessWidget {
-  final String label;
-  const _FocusChip({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Chip(
-      backgroundColor: AppColors.primary.withOpacity(0.12),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      label: Text(
-        label,
-        style: const TextStyle(
-          color: AppColors.dark,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
-  }
-}
-
-class _HighlightCard extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final IconData icon;
-  final Color color;
-
-  const _HighlightCard({
-    required this.title,
-    required this.subtitle,
-    required this.icon,
-    required this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: color.withOpacity(0.12),
-          child: Icon(icon, color: color),
-        ),
-        title: Text(
-          title,
-          style: const TextStyle(
-            fontWeight: FontWeight.w700,
-            color: AppColors.dark,
-          ),
-        ),
-        subtitle: Text(
-          subtitle,
-          style: const TextStyle(color: AppColors.dark),
-        ),
-        trailing: const Icon(Icons.chevron_right, color: AppColors.dark),
-        onTap: () {},
-      ),
-    );
-  }
-}
-
-class _ProgressHighlightCard extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final IconData icon;
-  final Color color;
-  final double progress;
-
-  const _ProgressHighlightCard({
-    required this.title,
-    required this.subtitle,
-    required this.icon,
-    required this.color,
-    required this.progress,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Row(
-          children: [
-            CircleAvatar(
-              backgroundColor: color.withOpacity(0.12),
-              child: Icon(icon, color: color),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.dark,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    subtitle,
-                    style: const TextStyle(color: AppColors.dark),
-                  ),
-                  const SizedBox(height: 8),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: LinearProgressIndicator(
-                      value: progress,
-                      minHeight: 8,
-                      backgroundColor: AppColors.primary.withOpacity(0.12),
-                      valueColor: AlwaysStoppedAnimation<Color>(color),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(width: 12),
-            Text(
-              '${(progress * 100).round()}%',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: color,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
