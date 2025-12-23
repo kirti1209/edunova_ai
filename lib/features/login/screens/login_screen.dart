@@ -71,30 +71,13 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _handleAppleLogin() async {
-    setState(() => _isLoading = true);
-    try {
-      final userCredential = await _authService.signInWithApple();
-      if (userCredential != null && mounted) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => const DashboardScreen(),
-          ),
-        );
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Apple login failed: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    } finally {
-      if (mounted) {
-        setState(() => _isLoading = false);
-      }
-    }
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Apple sign-in is disabled, please try another method.'),
+        backgroundColor: Colors.red,
+      ),
+    );
   }
 
   Future<void> _handleOneTapLogin() async {
