@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../constants/app_colors.dart';
 
 class DashboardHeader extends StatelessWidget {
-  final String? userEmail;
-
-  const DashboardHeader({super.key, this.userEmail});
+  const DashboardHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +16,10 @@ class DashboardHeader extends StatelessWidget {
           bottomRight: Radius.circular(30),
         ),
       ),
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Welcome back!',
             style: TextStyle(
               color: AppColors.white,
@@ -29,13 +27,26 @@ class DashboardHeader extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 6),
-          Text(
-            userEmail ?? 'Let’s keep learning',
-            style: const TextStyle(
-              color: AppColors.white,
-              fontSize: 16,
-            ),
+          SizedBox(height: 6),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.bolt,
+                color: AppColors.primary,
+                size: 18,
+              ),
+              SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  'Ready for your next win today?',
+                  style: TextStyle(
+                    color: AppColors.white,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

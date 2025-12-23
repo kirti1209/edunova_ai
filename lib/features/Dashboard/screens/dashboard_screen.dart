@@ -55,12 +55,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Welcome Section
-              DashboardHeader(userEmail: userEmail),
+              const DashboardHeader(),
               const SizedBox(height: 24),
               
               // Quick Stats
-              QuickStats(
-                items: const [
+              const QuickStats(
+                items: [
                   StatItem(
                     title: 'Courses',
                     value: '12',
@@ -150,8 +150,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
               ),
               const SizedBox(height: 12),
-              HighlightsSection(
-                highlights: const [
+              const HighlightsSection(
+                highlights: [
                   HighlightItem(
                     title: 'Assignment due',
                     subtitle: 'UI/UX Wireframes • due in 6h',
@@ -165,7 +165,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     color: AppColors.primary,
                   ),
                 ],
-                progressHighlight: const ProgressHighlight(
+                progressHighlight: ProgressHighlight(
                   title: 'Certificate progress',
                   subtitle: 'Mobile Dev Track • 60% complete',
                   icon: Icons.workspace_premium,
