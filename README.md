@@ -1,16 +1,40 @@
-# edunova_ai
+# Edunova AI
 
-A new Flutter project.
+Flutter-based learning dashboard with email login, personalized welcome, quick stats, focus chips, course cards, and highlights.
 
-## Getting Started
+## Features
+- Email login powered by Firebase (see `lib/features/login`)
+- Dashboard with greeting header, quick stats, focus chips, courses, and highlights (`lib/features/Dashboard`)
+- Light gradient background and reusable widgets for cards/chips
 
-This project is a starting point for a Flutter application.
+## Prerequisites
+- Flutter 3.x
+- Dart SDK (bundled with Flutter)
+- Firebase project keys (copy `google-services.json` into `android/app` and `GoogleService-Info.plist` into `ios/Runner`)
 
-A few resources to get you started if this is your first Flutter project:
+## Setup
+1) Install dependencies
+```
+flutter pub get
+```
+2) Configure Firebase
+- Update `lib/firebase_options.dart` via `flutterfire configure` or by adding your keys manually.
+- Ensure Android/iOS platform config files are placed as noted above.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Run
+```
+flutter run
+```
+Use `-d chrome`, `-d android`, or `-d ios` to target a specific device/emulator.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Build
+- Android: `flutter build apk` or `flutter build appbundle`
+- iOS: `flutter build ios`
+- Web: `flutter build web`
+
+## Project structure (key parts)
+- `lib/main.dart` — app entry
+- `lib/constants/` — theme/colors/strings
+- `lib/features/login/` — auth UI + service
+- `lib/features/Dashboard/` — dashboard screens and widgets
+
