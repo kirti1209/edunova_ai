@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "623528099306",
+    "project_id": "edunova-ai-d2832",
+    "storage_bucket": "edunova-ai-d2832.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:623528099306:android:c6933c45f01abc213c0693",
+        "android_client_info": {
+          "package_name": "com.example.edunova_ai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "623528099306-j1lipg6908nte9b9hb6md46ni8tidg05.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.edunova_ai",
+            "certificate_hash": "d6868b1e8fb2e13781612c9aa48dda77c3d5f3e7"
+          }
+        },
+        {
+          "client_id": "623528099306-98rebp6c1o5c4s4pg91u7opqopq9qaiu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIP5-S292J5aknmtmUUFmrz4jSnUUnOD0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "623528099306-98rebp6c1o5c4s4pg91u7opqopq9qaiu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "623528099306-5lt65iab2j5iak4svqup2akrqca42f9i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.edunovaAi"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
